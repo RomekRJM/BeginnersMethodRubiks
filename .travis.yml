@@ -8,7 +8,7 @@ compiler:
 sudo: required
 
 install:
-  - sudo apt-get install libboost-all-dev
+  - brew install boost
 
 script:
   - make test
