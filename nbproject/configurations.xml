@@ -35,7 +35,6 @@
         <itemPath>test_cube_algorithms.cpp</itemPath>
         <itemPath>test_cube_generator.cpp</itemPath>
         <itemPath>test_method_steps.cpp</itemPath>
-        <itemPath>test_rcs.cpp</itemPath>
         <itemPath>test_solve_random.cpp</itemPath>
         <itemPath>test_suite.cpp</itemPath>
       </logicalFolder>
@@ -114,8 +113,6 @@
       </item>
       <item path="test_method_steps.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="test_rcs.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="test_solve_random.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="test_suite.cpp" ex="false" tool="1" flavor2="0">
@@ -191,8 +188,6 @@
       <item path="test_cube_generator.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="test_method_steps.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="test_rcs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="test_solve_random.cpp" ex="false" tool="1" flavor2="0">
       </item>

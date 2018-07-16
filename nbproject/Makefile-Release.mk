@@ -56,7 +56,6 @@ TESTOBJECTFILES= \
 	${TESTDIR}/test_cube_algorithms.o \
 	${TESTDIR}/test_cube_generator.o \
 	${TESTDIR}/test_method_steps.o \
-	${TESTDIR}/test_rcs.o \
 	${TESTDIR}/test_solve_random.o \
 	${TESTDIR}/test_suite.o
 
@@ -123,7 +122,7 @@ ${OBJECTDIR}/method_steps.o: method_steps.cpp
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/test_beginners_method.o ${TESTDIR}/test_cube.o ${TESTDIR}/test_cube_algorithms.o ${TESTDIR}/test_cube_generator.o ${TESTDIR}/test_method_steps.o ${TESTDIR}/test_rcs.o ${TESTDIR}/test_solve_random.o ${TESTDIR}/test_suite.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/test_beginners_method.o ${TESTDIR}/test_cube.o ${TESTDIR}/test_cube_algorithms.o ${TESTDIR}/test_cube_generator.o ${TESTDIR}/test_method_steps.o ${TESTDIR}/test_solve_random.o ${TESTDIR}/test_suite.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   
 
@@ -156,12 +155,6 @@ ${TESTDIR}/test_method_steps.o: test_method_steps.cpp
 	${MKDIR} -p ${TESTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/test_method_steps.o test_method_steps.cpp
-
-
-${TESTDIR}/test_rcs.o: test_rcs.cpp 
-	${MKDIR} -p ${TESTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/test_rcs.o test_rcs.cpp
 
 
 ${TESTDIR}/test_solve_random.o: test_solve_random.cpp 
