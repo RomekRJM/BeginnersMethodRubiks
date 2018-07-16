@@ -7,8 +7,5 @@ compiler:
   
 sudo: required
 
-install:
-  - brew install boost
-
 script:
   - make test
