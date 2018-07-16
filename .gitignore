@@ -28,7 +28,7 @@
 *.app
 
 # Netbeans
-nbproject/
+nbproject/private/
 build/
 .dep.inc
 
