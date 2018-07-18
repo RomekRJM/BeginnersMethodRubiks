@@ -7,5 +7,8 @@ compiler:
   
 sudo: required
 
+env:
+  - TEST_OUTPUT=/tmp/test_output
+
 script:
-  - make test
+  - make test | tee $TEST_OUTPUT ; grep "\*\*\* No errors detected" $TEST_OUTPUT
