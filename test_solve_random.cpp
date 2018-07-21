@@ -1,10 +1,23 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
+#include <cstdlib>
 #include <future>
 #include <chrono>
+#include <string>
 #include "beginners_method.hpp"
 #include "cube.hpp"
 #include "cube_generator.hpp"
+
+using namespace std;
+
+const string ROUNDS = "ROUNDS";
+const string ROUNDS_DEFAULT = "250";
+
+string getEnvOrDefault(const string& varName, const string& defaultValue)
+{
+    const char* value = getenv(varName.c_str());
+    return value ? value : defaultValue;
+}
 
 struct CubeSolution {
     CubeSolution(string i, bool s, string is) : 
@@ -32,7 +45,7 @@ void tryToSolveRandom(promise<CubeSolution> cubePromise) {
 }
 
 BOOST_AUTO_TEST_CASE(test_solve_many_random_in_parallel) {
-    const int NUM_ROUNDS = 2500;
+    const int NUM_ROUNDS = stoi(getEnvOrDefault(ROUNDS, ROUNDS_DEFAULT));
     const int NUM_THREADS = 4;
     const int ALL_TASKS = NUM_ROUNDS * NUM_THREADS;
     stringstream ss;
