@@ -87,9 +87,6 @@ BOOST_AUTO_TEST_CASE(test_dasy) {
     Cube THIRD_LAYER_LEFT_EDGE_PIECE = CubeGenerator::fromString(
             "YWWYBRWYB,WWBWYBGOR,YGGGOGGYO,GRWOWWYBO,OGRBRORRY,OBBYGORRB"
             );
-    Cube WHITE_RING_ON_SIDE = CubeGenerator::fromString(
-            "YBBOBGOGOG,BYRGWRORW,BRYYBRBYG,YGROYYYBR,GGYBRGWOW,OWWWOWRWO"
-            );
     
     vector<CubeTest> dasy_scenarios = {
         CubeTest(DOWN_EDGE_PIECE, new Dasy(), "F,F,", 2),                // DOWN, 0, 1
@@ -97,7 +94,6 @@ BOOST_AUTO_TEST_CASE(test_dasy) {
         CubeTest(SECOND_LAYER_RIGHT_EDGE_PIECE, new Dasy(), "F,", 1),    // LEFT, 1, 2
         CubeTest(SECOND_LAYER_LEFT_EDGE_PIECE, new Dasy(), "F',", 1),    // RIGHT, 1, 0
         CubeTest(THIRD_LAYER_LEFT_EDGE_PIECE, new Dasy(), "F,R,", 2),    // FRONT, 0, 1
-        CubeTest(WHITE_RING_ON_SIDE, new Dasy(), "F,R,", 2),    // RIGHT, 2, 1
         
         CubeTest(*DOWN_EDGE_PIECE.flip(Flip::Y_CLOCKWISE_90), new Dasy(), "L',L',", 2),              // DOWN, 1, 0
         CubeTest(*FIRST_LAYER_EDGE_PIECE.flip(Flip::Y_CLOCKWISE_90), new Dasy(), "L,U,B',", 2),      // LEFT, 2, 1

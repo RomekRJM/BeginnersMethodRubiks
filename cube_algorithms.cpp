@@ -243,10 +243,11 @@ const PetalSolution* Dasy::nextMissingWhiteEdge(Cube cube) {
     for (auto it = PETAL_SOLUTIONS.begin(); it != PETAL_SOLUTIONS.end(); ++it) {
         Color startingPositionColor = cube.getColor(it->startingPosition);
         Color nextPositionColor = cube.getColor(it->nextPosition);
-        Color upPositionColor = cube.getColor(it->targetUpPosition);
-        bool nextPositionExists = (NULL_POSITION == it->nextPosition);
+        bool nextPositionExists = !(NULL_POSITION == it->nextPosition);
+        bool startingPositionWhite = (startingPositionColor == WHITE);
+        bool nextPositionWhite = nextPositionExists && (nextPositionColor == WHITE);
         
-        if (startingPositionColor == WHITE && nextPositionColor != WHITE) {
+        if (startingPositionWhite && !nextPositionWhite) {
             return it;
         }
     }
