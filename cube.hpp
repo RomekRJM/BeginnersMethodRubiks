@@ -51,8 +51,10 @@ public:
     Side side;
     int row;
     int column;
-    bool operator==(CubePosition &other);
+    bool operator==(const CubePosition &other);
 };
+
+extern CubePosition NULL_POSITION;
 
 template<typename K, typename V>
 V findInMap(K key, map<K, V> _map) {

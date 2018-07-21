@@ -52,26 +52,26 @@ const array<CubePosition, 4> Dasy::WHITE_PETALS = {
 };
 
 const array<PetalSolution, 20> Dasy::PETAL_SOLUTIONS = {
-    PetalSolution(CubePosition(FRONT, 0, 1), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
+    PetalSolution(CubePosition(FRONT, 0, 1), CubePosition(FRONT, 1, 2), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
     PetalSolution(CubePosition(FRONT, 1, 0), CubePosition(UP, 1, 0), ROTATE_LEFT_COUNTER_CLOCKWISE),
     PetalSolution(CubePosition(FRONT, 1, 2), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
-    PetalSolution(CubePosition(FRONT, 2, 1), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
-    PetalSolution(CubePosition(RIGHT, 0, 1), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
+    PetalSolution(CubePosition(FRONT, 2, 1), CubePosition(FRONT, 1, 0), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
+    PetalSolution(CubePosition(RIGHT, 0, 1), CubePosition(RIGHT, 1, 2), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
     PetalSolution(CubePosition(RIGHT, 1, 0), CubePosition(UP, 2, 1), ROTATE_FRONT_COUNTER_CLOCKWISE),
     PetalSolution(CubePosition(RIGHT, 1, 2), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE),
-    PetalSolution(CubePosition(RIGHT, 2, 1), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
-    PetalSolution(CubePosition(LEFT, 0, 1), CubePosition(UP, 1, 0), ROTATE_LEFT_CLOCKWISE),
+    PetalSolution(CubePosition(RIGHT, 2, 1), CubePosition(RIGHT, 1, 0), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
+    PetalSolution(CubePosition(LEFT, 0, 1), CubePosition(LEFT, 1, 2), CubePosition(UP, 1, 0), ROTATE_LEFT_CLOCKWISE),
     PetalSolution(CubePosition(LEFT, 1, 0), CubePosition(UP, 0, 1), ROTATE_BACK_COUNTER_CLOCKWISE),
     PetalSolution(CubePosition(LEFT, 1, 2), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
-    PetalSolution(CubePosition(LEFT, 2, 1), CubePosition(UP, 1, 0), ROTATE_LEFT_CLOCKWISE),
-    PetalSolution(CubePosition(BACK, 0, 1), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE),
+    PetalSolution(CubePosition(LEFT, 2, 1), CubePosition(LEFT, 1, 0), CubePosition(UP, 1, 0), ROTATE_LEFT_CLOCKWISE),
+    PetalSolution(CubePosition(BACK, 0, 1), CubePosition(BACK, 1, 2), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE),
     PetalSolution(CubePosition(BACK, 1, 0), CubePosition(UP, 1, 2), ROTATE_RIGHT_COUNTER_CLOCKWISE),
     PetalSolution(CubePosition(BACK, 1, 2), CubePosition(UP, 1, 0), ROTATE_LEFT_CLOCKWISE),
-    PetalSolution(CubePosition(BACK, 2, 1), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE),
-    PetalSolution(CubePosition(DOWN, 0, 1), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
-    PetalSolution(CubePosition(DOWN, 1, 0), CubePosition(UP, 1, 0), ROTATE_LEFT_COUNTER_CLOCKWISE),
-    PetalSolution(CubePosition(DOWN, 1, 2), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
-    PetalSolution(CubePosition(DOWN, 2, 1), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE)
+    PetalSolution(CubePosition(BACK, 2, 1), CubePosition(BACK, 1, 0), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE),
+    PetalSolution(CubePosition(DOWN, 0, 1), CubePosition(LEFT, 1, 2), CubePosition(UP, 2, 1), ROTATE_FRONT_CLOCKWISE),
+    PetalSolution(CubePosition(DOWN, 1, 0), CubePosition(FRONT, 1, 0), CubePosition(UP, 1, 0), ROTATE_LEFT_COUNTER_CLOCKWISE),
+    PetalSolution(CubePosition(DOWN, 1, 2), CubePosition(FRONT, 1, 2), CubePosition(UP, 1, 2), ROTATE_RIGHT_CLOCKWISE),
+    PetalSolution(CubePosition(DOWN, 2, 1), CubePosition(RIGHT, 1, 2), CubePosition(UP, 0, 1), ROTATE_BACK_CLOCKWISE)
 };
 
 int Cublet::countPartiallyMatchedSides(Cube cube) const {
@@ -231,7 +231,7 @@ void Dasy::rotate(Cube &cube) {
     }
 
     for (int i = 0; i < 3; ++i) {
-        if (cube.getColor(solution->cantBeWhite) == WHITE) {
+        if (cube.getColor(solution->targetUpPosition) == WHITE) {
             CubeAlgorithm::doMove(cube, ROTATE_UP_CLOCKWISE);
         }
     }
@@ -241,7 +241,13 @@ void Dasy::rotate(Cube &cube) {
 
 const PetalSolution* Dasy::nextMissingWhiteEdge(Cube cube) {
     for (auto it = PETAL_SOLUTIONS.begin(); it != PETAL_SOLUTIONS.end(); ++it) {
-        if (cube.getColor(it->startingPosition) == WHITE) {
+        Color startingPositionColor = cube.getColor(it->startingPosition);
+        Color nextPositionColor = cube.getColor(it->nextPosition);
+        bool nextPositionExists = !(NULL_POSITION == it->nextPosition);
+        bool startingPositionWhite = (startingPositionColor == WHITE);
+        bool nextPositionWhite = nextPositionExists && (nextPositionColor == WHITE);
+        
+        if (startingPositionWhite && !nextPositionWhite) {
             return it;
         }
     }

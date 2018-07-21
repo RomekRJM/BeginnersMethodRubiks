@@ -12,9 +12,11 @@
 
 using namespace std;
 
-bool CubePosition::operator==(CubePosition &other) {
+bool CubePosition::operator==(const CubePosition &other) {
     return (side == other.side) && (row == other.row) && (column == other.column);
 }
+
+CubePosition NULL_POSITION = CubePosition(FRONT, -1, -1);
 
 Cube::Cube() {
     setUpRotations();

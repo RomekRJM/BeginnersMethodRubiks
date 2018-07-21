@@ -21,13 +21,18 @@ using namespace std;
 struct PetalSolution {
 public:
 
-    PetalSolution(CubePosition s, CubePosition d, string r) :
-    startingPosition(s), cantBeWhite(d), rotation(r) {
+    PetalSolution(CubePosition s, CubePosition n, CubePosition u, string r) :
+    startingPosition(s), nextPosition(n), targetUpPosition(u), rotation(r) {
+    };
+    
+    PetalSolution(CubePosition s, CubePosition u, string r) :
+    startingPosition(s), nextPosition(NULL_POSITION), targetUpPosition(u), rotation(r) {
     };
 
 public:
     CubePosition startingPosition;
-    CubePosition cantBeWhite;
+    CubePosition nextPosition;
+    CubePosition targetUpPosition;
     string rotation;
 };
 
