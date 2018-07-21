@@ -73,6 +73,11 @@ BOOST_AUTO_TEST_CASE(test_solve_many_random_in_parallel) {
                     << " wasn't solved!" << endl;
             }
         }
+        
+        if((r % 1000 == 0) && r) {
+            cout << "Checked " << (r*NUM_THREADS) << " out of " 
+                 << ALL_TASKS << " random cubes." << endl;
+        }
     }
     
     cout << ss.str() << endl;
