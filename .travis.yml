@@ -11,6 +11,6 @@ env:
   - TEST_OUTPUT=test_output
 
 script:
-  - make test | tee $TEST_OUTPUT
+  - make test |& tee $TEST_OUTPUT
   - cat $TEST_OUTPUT
   - grep "No errors detected" $TEST_OUTPUT
