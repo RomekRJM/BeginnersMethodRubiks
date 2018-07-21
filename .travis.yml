@@ -8,7 +8,8 @@ compiler:
 sudo: required
 
 env:
-  - TEST_OUTPUT=/tmp/test_output
+  - TEST_OUTPUT=test_output
 
 script:
-  - make test | tee $TEST_OUTPUT ; grep "\*\*\* No errors detected" $TEST_OUTPUT
+  - make test 2>&1 | tee $TEST_OUTPUT
+  - grep "\*\*\* No errors detected" $TEST_OUTPUT
