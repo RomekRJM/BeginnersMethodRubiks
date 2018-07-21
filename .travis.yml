@@ -11,4 +11,5 @@ env:
   - TEST_OUTPUT=/tmp/test_output
 
 script:
-  - make test | tee $TEST_OUTPUT ; grep "\*\*\* No errors detected" $TEST_OUTPUT
+  - make test | tee $TEST_OUTPUT
+  - grep "\*\*\* No errors detected" $TEST_OUTPUT

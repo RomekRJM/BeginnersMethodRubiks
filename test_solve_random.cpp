@@ -32,7 +32,7 @@ void tryToSolveRandom(promise<CubeSolution> cubePromise) {
 }
 
 BOOST_AUTO_TEST_CASE(test_solve_many_random_in_parallel) {
-    const int NUM_ROUNDS = 2500;
+    const int NUM_ROUNDS = 1;
     const int NUM_THREADS = 4;
     const int ALL_TASKS = NUM_ROUNDS * NUM_THREADS;
     stringstream ss;
