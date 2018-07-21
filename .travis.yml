@@ -10,6 +10,9 @@ sudo: required
 env:
   - TEST_OUTPUT=test_output
 
+before_script:
+  - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then export ROUNDS=25000; fi
+
 script:
   - make test 2>&1 | tee $TEST_OUTPUT
   - grep "\*\*\* No errors detected" $TEST_OUTPUT
