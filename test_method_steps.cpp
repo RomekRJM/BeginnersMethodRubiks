@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(test_is_yellow_arc_done) {
 
 BOOST_AUTO_TEST_CASE(test_is_yellow_arc_done_failing) {
     Cube cube = CubeGenerator::fromString(
-            "GYBGGGGGG,YYYBYYORO,GGBBBBBBB,WWWWWWWWW,YOROOOOOO,RYYRRRRRR"
+            "YYYGGGGGG,YRYBYOBGB,GYGBBBBBB,WWWWWWWWW,OYROOOOOO,OYRRRRRRR"
             );
     BOOST_CHECK(!MethodSteps().isYellowArcDone(cube));
 }
