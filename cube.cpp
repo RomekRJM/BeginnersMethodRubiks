@@ -533,3 +533,30 @@ Flip Cube::whatFlipGivesColorOnTop(Color color) {
 bool Cube::operator==(Cube & other) {
     return this->cube == other.cube;
 }
+
+void Cube::validate() {
+    array<Side, SIDES> sides = {FRONT, UP, BACK, DOWN, RIGHT, LEFT};
+    map<Color, int> howManyTimesRepeated;
+    const int MAX_OCCURENCES = SIZE*SIZE;
+    
+    for(Side side : sides) {
+        for(int i=0; i<SIZE; ++i){
+            for(int j=0; j<SIZE; ++j) {
+                Color color = cube[side][i][j];
+                auto it = howManyTimesRepeated.find(color);
+                int occurences = it->second;
+                
+                if(it != howManyTimesRepeated.end()) {
+                    howManyTimesRepeated[color] = ++occurences;
+                    
+                    if (occurences > MAX_OCCURENCES) {
+                        throw InvalidCubeException("More than " + to_string(MAX_OCCURENCES)
+                                + " " + getColorName(color) + " pieces.");
+                    }
+                } else {
+                    howManyTimesRepeated[color] = 1;
+                }
+            }
+        }
+    }
+}

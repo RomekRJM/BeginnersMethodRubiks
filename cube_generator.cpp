@@ -7,12 +7,15 @@
 using namespace std;
 
 Cube CubeGenerator::unscrambled() {
-    return Cube();
+    Cube cube = Cube();
+    cube.validate();
+    return cube;
 }
 
 Cube CubeGenerator::fromArray(array<array<array<Color, Cube::SIZE>, Cube::SIZE>, Cube::SIDES> c) {
     Cube cube = Cube();
     cube.cube = c;
+    cube.validate();
     return cube;
 }
 
@@ -32,6 +35,7 @@ Cube CubeGenerator::fromRandomScramble(string &rotationsPerformed) {
     }
     
     rotationsPerformed = ss.str();
+    cube.validate();
     return cube;
 }
 
@@ -87,5 +91,6 @@ Cube CubeGenerator::fromString(string s) {
         }
     }
 
+    cube.validate();
     return cube;
 }

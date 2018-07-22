@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(test_are_first_layer_corners_done) {
 
 BOOST_AUTO_TEST_CASE(test_are_first_layer_corners_done_misplaced_corner) {
     Cube cube = CubeGenerator::fromString(
-            "YRWROYOOG,YYGYYOOYO,YGRORRRRR,WWOWWWWWW,BBROBGYBB,GBBBGGGGG"
+            "YGROBOBBO,YYRBYRROW,BRORGYGGG,WWYWWWWWW,BGYYRBGRR,BYGGOBOOO"
             );
     BOOST_CHECK(!MethodSteps().areFirstLayerCornersDone(cube));
 }

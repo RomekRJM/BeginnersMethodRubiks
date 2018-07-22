@@ -66,6 +66,19 @@ V findInMap(K key, map<K, V> _map) {
     throw domain_error("Key not found in map.");
 }
 
+class InvalidCubeException : public exception {
+public:
+    InvalidCubeException(string r) : reason(r) {};
+    
+    virtual const char* what() const throw () {
+        string errorMessage = "Cube is invalid. Reason: " + reason;
+        return errorMessage.c_str();
+    }
+    
+private:
+    string reason;
+};
+
 class Cube {
     friend class MethodSteps;
     friend class Dasy;
@@ -118,6 +131,7 @@ public:
     void ensureOnTop(Color color);
     bool isSideCompleted(Side side);
     bool operator==(Cube & other);
+    void validate();
 
 private:
     Cube();

@@ -101,3 +101,19 @@ BOOST_AUTO_TEST_CASE(test_flip_z_counter_clockwise_90) {
 BOOST_AUTO_TEST_CASE(test_upside_down) {
     flip_test(UPSIDE_DOWN, "GGGGGGRRW,YYYYYYRRR,BBBBBBYOO,WWOWWOWWO,YOOYOOGGG,RRWRRWBBB");
 }
+
+BOOST_AUTO_TEST_CASE(test_validate_correct) {
+    CubeGenerator::fromString("GGGGGGRRW,YYYYYYRRR,BBBBBBYOO,WWOWWOWWO,YOOYOOGGG,RRWRRWBBB");
+}
+
+BOOST_AUTO_TEST_CASE(test_validate_wrong_number_of_pieces) {
+    bool exceptionThrown = false;
+    
+    try {
+        CubeGenerator::fromString("GGGGGGGGG,GYYYYYRRR,BBBBBBYOO,WWOWWOWWO,YOOYOOGGG,RRWRRWBBB");
+    } catch (InvalidCubeException ice) {
+        exceptionThrown = true;
+    }
+    
+    BOOST_CHECK(exceptionThrown);
+}
