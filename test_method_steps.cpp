@@ -66,13 +66,6 @@ BOOST_AUTO_TEST_CASE(test_is_yellow_dot_done) {
     BOOST_CHECK(MethodSteps().isYellowDotDone(cube));
 }
 
-BOOST_AUTO_TEST_CASE(test_is_yellow_dot_done_misplaced_dot) {
-    Cube cube = CubeGenerator::fromString(
-            "GYBGGGGGG,YYYBWYORO,GGBBBBBBB,WWWWWWWWW,YOROOOOOO,RYYRRRRRR"
-            );
-    BOOST_CHECK(!MethodSteps().isYellowDotDone(cube));
-}
-
 BOOST_AUTO_TEST_CASE(test_is_yellow_line_done) {
     Cube cube = CubeGenerator::fromString(
             "OYYRRRRRR,OBYYYYYOR,GYBOOOOOO,WWWWWWWWW,BGRGGGGGG,YRGBBBBBB"
@@ -82,7 +75,7 @@ BOOST_AUTO_TEST_CASE(test_is_yellow_line_done) {
 
 BOOST_AUTO_TEST_CASE(test_is_yellow_line_done_mising_center) {
     Cube cube = CubeGenerator::fromString(
-            "OYYRRRRRR,OBYYWYYOR,GYBOOOOOO,WWWWYWWWW,BGRGGGGGG,YRGBBBBBB"
+            "GYBGGGGGG,YYYBYYORO,GGBBBBBBB,WWWWWWWWW,YOROOOOOO,RYYRRRRRR"
             );
     BOOST_CHECK(!MethodSteps().isYellowLineDone(cube));
 }
@@ -94,9 +87,9 @@ BOOST_AUTO_TEST_CASE(test_is_yellow_arc_done) {
     BOOST_CHECK(MethodSteps().isYellowArcDone(cube));
 }
 
-BOOST_AUTO_TEST_CASE(test_is_yellow_arc_done_mising_center) {
+BOOST_AUTO_TEST_CASE(test_is_yellow_arc_done_failing) {
     Cube cube = CubeGenerator::fromString(
-            "GYBGGGGGG,YYYBWYORO,GGBBBBBBB,WWWWWWWWW,YOROOOOOO,RYYRRRRRR"
+            "GYBGGGGGG,YYYBYYORO,GGBBBBBBB,WWWWWWWWW,YOROOOOOO,RYYRRRRRR"
             );
     BOOST_CHECK(!MethodSteps().isYellowArcDone(cube));
 }
